@@ -7,9 +7,12 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <!-- Importantisimo agregarlo para el delete -->
+    <%= javascript_include_tag "turbo", type: "module" %>
   </head>
 
   <body>
+    <%= notice %>
     <%= link_to 'Products List' , products_path %>
     <%= link_to 'Aregar Producto', new_product_path %>
     <%= yield %>

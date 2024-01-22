@@ -15,10 +15,30 @@ class ProductsController < ApplicationController
         @product = Product.new(product_params)
 
         if @product.save
-            redirect_to products_path
+            redirect_to products_path, notice: "Product created successfully"
         else
-            render :new
+            render :new, status: :unprocessable_entity
         end
+    end
+
+    def edit
+        @product = Product.find(params[:id])
+    end
+
+    def update
+        @product = Product.find(params[:id])
+
+        if @product.update(product_params)
+            redirect_to products_path, notice: "Product updated successfully"
+        else
+            render :edit, status: :unprocessable_entity
+        end
+    end
+
+    def destroy
+        @product = Product.find(params[:id])
+        @product.delete
+        redirect_to products_path, notice: "Product deleted successfully", status: :see_other
     end
 
     private 
